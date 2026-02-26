@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antempo Support</title>
+    <title>Antempo Support - Help Center</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #0A0E17;
             --card-bg: rgba(255, 255, 255, 0.05);
             --accent-color: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.4);
             --text-primary: #ffffff;
             --text-secondary: #94a3b8;
         }
@@ -19,112 +21,264 @@
             background-color: var(--bg-color);
             color: var(--text-primary);
             margin: 0;
+            overflow-x: hidden;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            line-height: 1.6;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 800px;
             width: 90%;
-            padding: 2rem;
+            margin: 4rem 1rem;
+            padding: 3rem;
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            border-radius: 32px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
         }
 
         .logo {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 1.5rem;
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+            width: 120px;
+            height: 120px;
+            border-radius: 28px;
+            object-fit: cover;
+            box-shadow: 0 10px 40px var(--accent-glow);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .logo-glow {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: var(--accent-color);
+            filter: blur(40px);
+            opacity: 0.15;
+            z-index: -1;
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            background: linear-gradient(135deg, #fff 0%, #6366f1 100%);
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        p {
+        .subtitle {
+            font-size: 1.1rem;
             color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+        }
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            text-align: left;
             margin-bottom: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .support-card {
             background: rgba(255, 255, 255, 0.03);
             padding: 1.5rem;
-            border-radius: 16px;
-            margin-bottom: 1rem;
+            border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: transform 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         .support-card:hover {
-            transform: translateY(-2px);
             border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .support-card h3 {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.1rem;
+            margin: 0 0 1rem 0;
+            font-size: 1.2rem;
             color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .email-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .email-list li {
+            margin-bottom: 0.5rem;
         }
 
         .email-link {
             color: var(--accent-color);
             text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            word-break: break-all;
+        }
+
+        .email-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Marquee Styles */
+        .marquee-container {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 1rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 3rem;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 30s linear infinite;
+        }
+
+        .testimonial {
+            display: inline-block;
+            margin: 0 2rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        .testimonial span {
+            color: var(--accent-color);
             font-weight: 600;
-            font-size: 1.1rem;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .faq-section {
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+        }
+
+        .faq-item b {
+            display: block;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .faq-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
         .footer {
-            margin-top: 2rem;
-            font-size: 0.8rem;
+            margin-top: 3rem;
+            font-size: 0.85rem;
             color: rgba(255, 255, 255, 0.3);
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--accent-color);
-            border-radius: 99px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <div class="badge">Official Support</div>
-        <h1>Antempo Support</h1>
-        <p>Need help with your focus journey? We're here for you.</p>
-
-        <div class="support-card">
-            <h3>Email Support</h3>
-            <p>For technical issues, account help, or feedback:</p>
-            <a href="mailto:kerem.newton571@gmail.com" class="email-link">kerem.newton571@gmail.com</a>
+        <div class="logo-container">
+            <div class="logo-glow"></div>
+            <img src="logo.png" alt="Antempo Logo" class="logo"
+                onerror="this.src='https://via.placeholder.com/120?text=Antempo'">
         </div>
 
-        <div class="support-card">
-            <h3>Response Time</h3>
-            <p>We typically respond to all support requests within 24-48 hours.</p>
+        <h1>Antempo Help Center</h1>
+        <p class="subtitle">Focus your mind, unlock your potential. We're here to support your journey.</p>
+
+        <div class="support-grid">
+            <div class="support-card">
+                <h3>📧 Email Support</h3>
+                <ul class="email-list">
+                    <li><a href="mailto:antempostudios@gmail.com" class="email-link">antempostudios@gmail.com</a></li>
+                    <li><a href="mailto:kerem.newton571@gmail.com" class="email-link">kerem.newton571@gmail.com</a></li>
+                </ul>
+            </div>
+            <div class="support-card">
+                <h3>⚡ Quick Support</h3>
+                <p style="margin:0; font-size: 0.9rem">Our team is active daily. Expect a personalized response within
+                    <span style="color:white; font-weight:600">24 hours</span>.</p>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h3 style="margin-bottom: 1rem">Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <b>Can I restore my premium subscription?</b>
+                <p>Yes, use the "Restore Purchases" button in the Profile settings to sync your active plan.</p>
+            </div>
+            <div class="faq-item">
+                <b>Your data is secure</b>
+                <p>We use end-to-end encryption for your personal focus stats and never share your data.</p>
+            </div>
         </div>
 
         <div class="footer">
-            &copy; 2026 Antempo. All rights reserved.
+            &copy; 2026 Antempo Studios. Designed by Kerem Celik.
+        </div>
+    </div>
+
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <div class="testimonial"><span>"Absolutely game changer!"</span> — Focus User</div>
+            <div class="testimonial"><span>"Best pomodoro app on the store."</span> — Sarah J.</div>
+            <div class="testimonial"><span>"Visuals are stunning."</span> — Tech Reviewer</div>
+            <div class="testimonial"><span>"Consistency finally pays off."</span> — Student Mode</div>
+            <div class="testimonial"><span>"Premium feel that motivates."</span> — Creative Mind</div>
+            <!-- Duplicate for seamless loop -->
+            <div class="testimonial"><span>"Absolutely game changer!"</span> — Focus User</div>
+            <div class="testimonial"><span>"Best pomodoro app on the store."</span> — Sarah J.</div>
+            <div class="testimonial"><span>"Visuals are stunning."</span> — Tech Reviewer</div>
+            <div class="testimonial"><span>"Consistency finally pays off."</span> — Student Mode</div>
+            <div class="testimonial"><span>"Premium feel that motivates."</span> — Creative Mind</div>
         </div>
     </div>
 </body>
+
 </html>
