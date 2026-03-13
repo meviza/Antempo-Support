@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Your Account - Antempo</title>
+  <meta name="description" content="Learn how to delete your Antempo account and all associated data. Step-by-step instructions and data retention details.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .deletion-hero {
+      padding: 140px 1.5rem 60px;
+      background: var(--hero-gradient);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .deletion-hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(229,138,52,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .deletion-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--fg);
+      margin-bottom: 0.75rem;
+    }
+    .deletion-hero__subtitle {
+      font-size: 1.1rem;
+      color: var(--fg-muted);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* Step cards */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .step {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      transition: all var(--transition);
+    }
+    .step:hover {
+      box-shadow: var(--shadow-md);
+      border-color: rgba(229,138,52,0.15);
+    }
+    .step__number {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--accent-gradient);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .step__content h3 {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 0.35rem;
+    }
+    .step__content p {
+      font-size: 0.925rem;
+      color: var(--fg-muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* Warning box */
+    .warning-box {
+      background: #FFF3F0;
+      border: 1px solid #FECACA;
+      border-left: 4px solid #EF4444;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0;
+    }
+    .warning-box__title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #DC2626;
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .warning-box p {
+      font-size: 0.925rem;
+      color: #7F1D1D;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* Data list */
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .data-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+    }
+    .data-card__icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .data-card__title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+    }
+    .data-card__desc {
+      font-size: 0.875rem;
+      color: var(--fg-muted);
+      line-height: 1.6;
+    }
+
+    /* Email alternative box */
+    .alternative-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .alternative-box__title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .alternative-box__desc {
+      font-size: 0.925rem;
+      color: var(--fg-muted);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+    .alternative-box__email {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      background: var(--accent-bg);
+      border: 1px solid rgba(229,138,52,0.15);
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--accent);
+      transition: all var(--transition);
+    }
+    .alternative-box__email:hover {
+      background: rgba(229,138,52,0.14);
+      color: #D4722A;
+    }
+
+    /* Timeline */
+    .timeline-bar {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 2rem 0;
+      position: relative;
+    }
+    .timeline-step {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+    .timeline-step__dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin: 0 auto 0.75rem;
+      position: relative;
+      z-index: 1;
+    }
+    .timeline-step:first-child .timeline-step__dot { background: var(--accent); }
+    .timeline-step:nth-child(2) .timeline-step__dot { background: var(--accent-light); }
+    .timeline-step:last-child .timeline-step__dot { background: var(--fg-subtle); }
+    .timeline-step__label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 0.2rem;
+    }
+    .timeline-step__desc {
+      font-size: 0.75rem;
+      color: var(--fg-muted);
+    }
+    .timeline-line {
+      position: absolute;
+      top: 6px;
+      left: 16.66%;
+      right: 16.66%;
+      height: 2px;
+      background: var(--border-strong);
+      z-index: 0;
+    }
+
+    /* Content section headings */
+    .content-heading {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .content-heading--spaced {
+      margin-top: 3.5rem;
+    }
+    .content-list {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .content-list li {
+      list-style: disc;
+      font-size: 0.95rem;
+      color: var(--fg-muted);
+      line-height: 1.8;
+      margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .deletion-hero { padding: 120px 1.25rem 50px; }
+      .data-grid { grid-template-columns: 1fr; }
+      .step { flex-direction: column; gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__brand">
+      <span>Antempo</span>
+    </a>
+    <button class="nav__toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav__links').classList.toggle('active')">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="nav__links">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#how-it-works">How It Works</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="support.html">Support</a>
+      <a href="index.html#download" class="nav__cta">Download Free</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="deletion-hero">
+  <div class="container">
+    <h1 class="deletion-hero__title">Delete Your Account</h1>
+    <p class="deletion-hero__subtitle">We are sorry to see you go. Here is everything you need to know about deleting your Antempo account and data.</p>
+  </div>
+</section>
+
+<!-- Main Content -->
+<section class="section">
+  <div class="container--narrow">
+
+    <p class="text-subtle" style="font-size:0.875rem;margin-bottom:2.5rem;">Last updated: March 13, 2026</p>
+
+    <!-- Warning -->
+    <div class="warning-box">
+      <div class="warning-box__title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+        This action is irreversible
+      </div>
+      <p>Once your account deletion is finalized, all your data is permanently removed from our servers and cannot be recovered. This includes your focus history, tasks, club memberships, badges, streaks, and subscription status. Please make sure you truly want to proceed before confirming deletion.</p>
+    </div>
+
+    <!-- Steps -->
+    <h2 class="content-heading">How to delete your account</h2>
+    <p class="text-muted" style="font-size:0.95rem;line-height:1.7;">Follow these steps to delete your account directly from the Antempo app.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step__number">1</div>
+        <div class="step__content">
+          <h3>Open Antempo and go to the "You" tab</h3>
+          <p>Launch the app and tap the <strong>"You"</strong> icon in the bottom navigation bar. This is your profile and settings area.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__number">2</div>
+        <div class="step__content">
+          <h3>Open Settings</h3>
+          <p>Scroll down and tap <strong>Settings</strong> (the gear icon). This opens the full settings panel where you manage your account preferences.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__number">3</div>
+        <div class="step__content">
+          <h3>Tap "Delete Account &amp; Data"</h3>
+          <p>Scroll to the bottom of the Settings screen. Under the <strong>Account</strong> section, tap <strong>"Delete Account &amp; Data"</strong>. This option is displayed in red for visibility.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__number">4</div>
+        <div class="step__content">
+          <h3>Confirm deletion</h3>
+          <p>A confirmation dialog will appear asking you to verify your decision. Tap <strong>"Delete My Account"</strong> to proceed. You will be signed out immediately and the 30-day grace period begins.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- What gets deleted -->
+    <h2 class="content-heading content-heading--spaced">What data gets deleted</h2>
+    <p class="text-muted" style="font-size:0.95rem;line-height:1.7;">When your account deletion is finalized, the following data is permanently removed from our servers:</p>
+
+    <div class="data-grid">
+      <div class="data-card">
+        <div class="data-card__icon">&#x1F464;</div>
+        <div class="data-card__title">Account Information</div>
+        <div class="data-card__desc">Your email address, display name, profile photo, and authentication credentials.</div>
+      </div>
+      <div class="data-card">
+        <div class="data-card__icon">&#x23F1;</div>
+        <div class="data-card__title">Focus Sessions</div>
+        <div class="data-card__desc">All recorded focus sessions, durations, timestamps, and completion history.</div>
+      </div>
+      <div class="data-card">
+        <div class="data-card__icon">&#x1F4CB;</div>
+        <div class="data-card__title">Tasks &amp; Plans</div>
+        <div class="data-card__desc">All tasks, weekly plans, priority tags, categories, and review notes you created.</div>
+      </div>
+      <div class="data-card">
+        <div class="data-card__icon">&#x1F4CA;</div>
+        <div class="data-card__title">Analytics &amp; Progress</div>
+        <div class="data-card__desc">Statistics, streaks, XP, badges, rank progress, and heatmap data.</div>
+      </div>
+      <div class="data-card">
+        <div class="data-card__icon">&#x1F46B;</div>
+        <div class="data-card__title">Club Memberships</div>
+        <div class="data-card__desc">Your membership in all study clubs, including leaderboard contributions and chat messages.</div>
+      </div>
+      <div class="data-card">
+        <div class="data-card__icon">&#x2699;</div>
+        <div class="data-card__title">Preferences</div>
+        <div class="data-card__desc">Timer settings, notification preferences, soundscape configurations, and app customizations.</div>
+      </div>
+    </div>
+
+    <!-- Club memberships -->
+    <h2 class="content-heading content-heading--spaced">What happens to your clubs</h2>
+    <p class="text-muted" style="font-size:0.95rem;line-height:1.7;margin-bottom:0.75rem;">When you delete your account, the following happens to your club memberships:</p>
+    <ul class="content-list">
+      <li><strong>Clubs you are a member of:</strong> You are automatically removed from the club. Your historical leaderboard contributions are anonymized (displayed as "Deleted User").</li>
+      <li><strong>Clubs you own:</strong> Ownership is transferred to the next most active member. If no other members exist, the club is permanently deleted.</li>
+      <li><strong>Co-focus sessions:</strong> Any active co-focus sessions you are part of will end for you immediately. Other participants are not affected.</li>
+    </ul>
+
+    <!-- Data retention -->
+    <h2 class="content-heading content-heading--spaced">Data retention period</h2>
+    <p class="text-muted" style="font-size:0.95rem;line-height:1.7;margin-bottom:1rem;">After you confirm deletion, your account enters a <strong>30-day grace period</strong>. During this time:</p>
+
+    <div class="highlight-box" style="background:var(--accent-bg);border-left:3px solid var(--accent);padding:1rem 1.25rem;border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin:1rem 0 1.5rem;">
+      <p style="color:var(--fg);margin:0;font-size:0.95rem;line-height:1.7;"><strong>Changed your mind?</strong> Simply sign back in with your original credentials within 30 days to cancel the deletion and restore your account with all data intact.</p>
+    </div>
+
+    <ul class="content-list">
+      <li>Your account is immediately deactivated and inaccessible to other users.</li>
+      <li>Your data is retained on our servers for 30 days in case you change your mind.</li>
+      <li>After 30 days, all data is permanently and irreversibly deleted from our servers and backups.</li>
+      <li>Anonymous, aggregated analytics data (not tied to your identity) may be retained for product improvement.</li>
+    </ul>
+
+    <!-- Timeline visualization -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin:1.5rem 0;">
+      <div class="timeline-bar">
+        <div class="timeline-line"></div>
+        <div class="timeline-step">
+          <div class="timeline-step__dot"></div>
+          <div class="timeline-step__label">Day 0</div>
+          <div class="timeline-step__desc">Deletion confirmed</div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step__dot"></div>
+          <div class="timeline-step__label">Days 1-30</div>
+          <div class="timeline-step__desc">Grace period (recoverable)</div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step__dot"></div>
+          <div class="timeline-step__label">Day 31+</div>
+          <div class="timeline-step__desc">Permanently deleted</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subscription note -->
+    <h2 class="content-heading content-heading--spaced">Important: Cancel your subscription first</h2>
+    <p class="text-muted" style="font-size:0.95rem;line-height:1.7;margin-bottom:0.75rem;">Deleting your Antempo account does <strong>not</strong> automatically cancel your App Store or Google Play subscription. To avoid continued charges:</p>
+    <ul class="content-list">
+      <li><strong>iOS:</strong> Go to Settings &gt; Apple ID &gt; Subscriptions &gt; Antempo &gt; Cancel Subscription</li>
+      <li><strong>Android:</strong> Open Google Play &gt; Payments &amp; subscriptions &gt; Subscriptions &gt; Antempo &gt; Cancel</li>
+    </ul>
+
+    <!-- Alternative: Email -->
+    <div class="alternative-box">
+      <div style="font-size:2rem;margin-bottom:0.75rem;">&#x2709;</div>
+      <div class="alternative-box__title">Prefer to request deletion by email?</div>
+      <p class="alternative-box__desc">If you cannot access the app or prefer not to use the in-app option, you can request account deletion by emailing us. Please send your request from the email address associated with your Antempo account.</p>
+      <a href="mailto:antempostudios@gmail.com?subject=Account%20Deletion%20Request" class="alternative-box__email">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        antempostudios@gmail.com
+      </a>
+      <p class="text-subtle" style="font-size:0.85rem;margin-top:1rem;">Include "Account Deletion Request" in the subject line. We will process your request within 48 hours and confirm via email.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer__grid">
+    <div>
+      <div class="nav__brand"><span>Antempo</span></div>
+      <p class="footer__brand-desc">Plan, Focus, Review, Grow. The productivity companion designed for students who dream big.</p>
+    </div>
+    <div class="footer__col">
+      <div class="footer__col-title">Product</div>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#download">Download</a>
+      <a href="index.html#faq">FAQ</a>
+    </div>
+    <div class="footer__col">
+      <div class="footer__col-title">Legal</div>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="account-deletion.html">Delete Account</a>
+    </div>
+    <div class="footer__col">
+      <div class="footer__col-title">Support</div>
+      <a href="support.html">Help Center</a>
+      <a href="mailto:antempostudios@gmail.com">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>&copy; 2026 Antempo Studios. All rights reserved.</span>
+    <div class="footer__bottom-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
